@@ -5,7 +5,6 @@ public class HealthController : MonoBehaviour
 {
     [SerializeField] private ButtonClickHandler _damageButton;
     [SerializeField] private ButtonClickHandler _healButton;
-    [SerializeField] private SliderValueChanger _healthSlider;
     [SerializeField] private Health _health;
     [SerializeField] private float _damage;
     [SerializeField] private float _restoreHealth;

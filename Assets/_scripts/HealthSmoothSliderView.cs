@@ -26,19 +26,19 @@ public class HealthSmoothSliderView : HealthView
             StopCoroutine(_valueChanger);
         }
 
-        value = value / Health.MaxValue;
-        _valueChanger = StartCoroutine(ChangeValueCoroutine(value));
+        float valuePart = value / Health.MaxValue;
+        _valueChanger = StartCoroutine(ChangeValueCoroutine(valuePart));
     }
 
-    private IEnumerator ChangeValueCoroutine(float targetValue)
+    private IEnumerator ChangeValueCoroutine(float targetValuePart)
     {
         float value = _healthBar.Value;
 
         yield return _startDelay;
 
-        while (value != targetValue)
+        while (value != targetValuePart)
         {
-            value = Mathf.MoveTowards(value, targetValue, _changeSpeed * Time.deltaTime);
+            value = Mathf.MoveTowards(value, targetValuePart, _changeSpeed * Time.deltaTime);
             _healthBar.SetValue(value);
 
             yield return null;
