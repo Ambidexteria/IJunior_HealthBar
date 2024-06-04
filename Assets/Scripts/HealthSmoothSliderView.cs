@@ -6,17 +6,13 @@ public class HealthSmoothSliderView : HealthView
 {
     [SerializeField] private SliderValueChanger _healthBar;
     [SerializeField] private float _changeSpeed = 0.2f;
-    [SerializeField] private float _changeStartDelay = 0.2f;
 
     private Coroutine _valueChanger;
-    private WaitForSeconds _startDelay;
 
     private void Awake()
     {
         if (_healthBar == null)
             throw new ArgumentNullException();
-
-        _startDelay = new WaitForSeconds(_changeStartDelay);
     }
 
     public override void Display(float value)
@@ -26,15 +22,13 @@ public class HealthSmoothSliderView : HealthView
             StopCoroutine(_valueChanger);
         }
 
-        float valuePart = value / Health.MaxValue;
+        float valuePart = value / GetMaxHealth();
         _valueChanger = StartCoroutine(ChangeValueCoroutine(valuePart));
     }
 
     private IEnumerator ChangeValueCoroutine(float targetValuePart)
     {
         float value = _healthBar.Value;
-
-        yield return _startDelay;
 
         while (value != targetValuePart)
         {

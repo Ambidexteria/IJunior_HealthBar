@@ -13,7 +13,7 @@ public class HealthSliderView : HealthView
 
     public override void Display(float value)
     {
-        float valuePart = value / Health.MaxValue;
+        float valuePart = value / GetMaxHealth();
         _healthBar.SetValue(valuePart);
     }
 }

@@ -7,7 +7,7 @@ public class ButtonClickHandler : MonoBehaviour
 {
     private Button _button;
 
-    public Action Clicked;
+    public event Action Clicked;
 
     private void Awake()
     {

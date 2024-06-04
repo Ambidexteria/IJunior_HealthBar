@@ -5,10 +5,26 @@ public class Health : MonoBehaviour
 {
     [SerializeField] private float _maxValue;
 
+    private float _currentHealth;
+
     public event Action Dying;
     public event Action<float> Changed;
 
-    public float Current { get; private set; }
+    public float Current
+    {
+        get
+        {
+            return _currentHealth;
+        }
+        private set
+        {
+            if (value <= 0)
+                _currentHealth = 0;
+            else
+                _currentHealth = value;
+        }
+    }
+
     public float MaxValue => _maxValue;
 
     private void Awake()
@@ -18,7 +34,7 @@ public class Health : MonoBehaviour
 
     public void Increase(float amount)
     {
-        if(amount <= 0)
+        if (amount <= 0)
             throw new ArgumentOutOfRangeException(nameof(amount) + " in " + nameof(Health));
 
         Current += amount;

@@ -3,27 +3,32 @@ using UnityEngine;
 
 public abstract class HealthView : MonoBehaviour
 {
-    [SerializeField] protected Health Health;
+    [SerializeField] private Health _health;
 
     private void Awake()
     {
-        if (Health == null)
+        if (_health == null)
             throw new ArgumentNullException();
     }
 
     private void Start()
     {
-        Display(Health.Current);        
+        Display(_health.Current);        
     }
 
     private void OnEnable()
     {
-        Health.Changed += Display;
+        _health.Changed += Display;
     }
 
     private void OnDisable()
     {
-        Health.Changed -= Display;
+        _health.Changed -= Display;
+    }
+
+    public float GetMaxHealth()
+    {
+        return _health.MaxValue;
     }
 
     public abstract void Display(float value);

@@ -14,7 +14,7 @@ public class HealthTextView : HealthView
 
     public override void Display(float value)
     {
-        string text = $"{(int)value} / {(int)Health.MaxValue}";
+        string text = $"{(int)value} / {(int)GetMaxHealth()}";
         _text.text = text;
     }
 }
